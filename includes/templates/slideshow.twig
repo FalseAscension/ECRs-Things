@@ -1,0 +1,22 @@
+<div class="slideshow__container">
+    <ul class="slideshow"
+        {% for k, v in attributes %}
+            data-{{ k }}={{ v }}
+        {% endfor %} >
+        {% for item in items %}
+            <li class="sldr{{ loop.index }}"> {{ item }} </li>
+        {% endfor %}
+    </ul>
+   
+    <div class="slideshow__navigation">
+        <!-- responsiveSlider.js navigation area
+            classes added automatically by js are: 
+                a.rslides_nav
+                    .next
+                    .prev
+                ul.rslides_tabs
+                    li.rslides_here
+        -->
+    </div>
+ 
+</div>

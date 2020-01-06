@@ -1,0 +1,11 @@
+<div class="socials">
+    <ul class="socials">
+        {% for k,v in attributes %}
+            <li class="{{ item.classes | join(' ') }}">
+                <a href="{{ v }}">
+                    <img src="{{ icondir ~ '/' ~ k ~ '.svg' }}" />
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,5 @@
+<div class="events-list flex">
+    {% for event in events %}
+        {% include 'partials/tease-event.twig' with {'event': event, 'class': "flex-item"} %}
+    {% endfor %}
+</div>
