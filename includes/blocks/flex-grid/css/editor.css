@@ -1,0 +1,41 @@
+.wp-block-ecr-flex-grid {
+    padding: 1em;
+}
+
+.wp-block-ecr-flex-grid .block-editor-block-list__layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.wp-block-ecr-flex-grid .block-editor-block-list__layout > * {
+    margin: 0;
+}
+
+.columns-2 .block-editor-block-list__layout > *  {
+    width: 50%;
+}
+.columns-3 .block-editor-block-list__layout > *  {
+    width: 33%;
+}
+.columns-4 .block-editor-block-list__layout > *  {
+    width: 25%;
+}
+.columns-5 .block-editor-block-list__layout > *  {
+    width: 20%;
+}
+.columns-6 .block-editor-block-list__layout > *  {
+    width: 16.5%;
+}
+.columns-7 .block-editor-block-list__layout > *  {
+    width: 14%;
+}
+.columns-8 .block-editor-block-list__layout > *  {
+    width: 12.5%;
+}
+.columns-9 .block-editor-block-list__layout > *  {
+    width: 11.1%;
+}
+.columns-10 .block-editor-block-list__layout > * {
+    width: 10%;
+}

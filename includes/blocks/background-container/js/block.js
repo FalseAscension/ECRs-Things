@@ -25,7 +25,7 @@ function ecr_BackgroundContainer() {
         icon: 'format-image',
         category: 'layout',
         supports: {
-            customClassName: false,
+            customClassName: false
         },
         attributes: {
             background_color: {
@@ -41,6 +41,10 @@ function ecr_BackgroundContainer() {
                 default: '#000'
             },
             min_height: {
+                type: 'string',
+                default: null
+            },
+            classes: {
                 type: 'string',
                 default: null
             }
@@ -115,6 +119,17 @@ function ecr_BackgroundContainer() {
                                     value: props.attributes.min_height
                                 }
                             )
+                        )
+                    ),
+                    el(PanelBody, {title: 'Advanced'},
+                        el(TextControl, 
+                            {
+                                label: 'Custom CSS Classes',
+                                onChange: ( value ) => {
+                                    props.setAttributes( { classes: value } );
+                                },
+                                value: props.attributes.classes
+                            }
                         )
                     )
                 ),
