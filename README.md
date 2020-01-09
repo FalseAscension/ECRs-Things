@@ -2,7 +2,7 @@
 
 This plugin contains a mishmash of things I use in my wordpress themes.
 
-** Blocks **
+**Blocks**
 
 * Background Container - A simple wrapper block that allows you to set its background image/colour.
 * Callout - A sleek block with an image, bold text and button inviting the user to take action.
@@ -12,12 +12,12 @@ This plugin contains a mishmash of things I use in my wordpress themes.
 * Socials - a block which shows social media icons in a row.
 * Events List - display a list of ecr-event posts.
 
-** Custom Post Types **
+**Custom Post Types**
 
-* Event - Speaks for itself. Uses event-details block to store start date*time, end date&time, location, postcode of an event.
+* Event - Speaks for itself. Uses event-details block to store start date&time, end date&time, location, postcode of an event.
 
-** Dependencies **
+**Dependencies**
 
-This plugin relies on the Timber Library: (https://wordpress.org/plugins/timber-library/)[https://wordpress.org/plugins/timber-library/]
+This plugin relies on the Timber Library: https://wordpress.org/plugins/timber-library/
 
 This plugin also makes some assumptions on where files in your theme are stored. Good luck lol. (WIP)
