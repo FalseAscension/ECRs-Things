@@ -1,8 +1,15 @@
-var ecrReveal = function () {
+function ecr_Reveal () {
     const { registerBlockType } = wp.blocks;
-    const { TextareaControl } = wp.components;
-    const { InnerBlocks } = wp.editor;
-    const { TextControl } = wp.components;
+    const { 
+        InnerBlocks,
+        InspectorControls
+    } = wp.blockEditor;
+    const {
+        TextControl,
+        TextareaControl,
+        PanelBody,
+        ColorPalette
+    } = wp.components;
     var el = wp.element.createElement;
 
 
@@ -20,6 +27,10 @@ var ecrReveal = function () {
                 default: ''
             },
             visibleText: {
+                type: 'string',
+                default: ''
+            },
+            color: {
                 type: 'string',
                 default: ''
             }
@@ -41,7 +52,21 @@ var ecrReveal = function () {
                 });
             }
 
-            return (
+            return [
+                el(InspectorControls, {}, 
+                    el(PanelBody, {title: 'Colors'}, 
+                        el(ColorPalette, {
+                            value: props.attributes.color,
+                            onChange: (value) => {
+                                props.setAttributes({ color: value });
+                            },
+                            colors: [
+                                { name: 'black', color: "#fff" },
+                                { name: 'white', color: "#000" }
+                            ]
+                        })
+                    )
+                ),
                 el('div', { className: props.className },
                     el('div', { className: 'title' },
                         el(TextControl, {
@@ -69,7 +94,7 @@ var ecrReveal = function () {
                         })
                     )
                 )
-            );
+            ];
         },
 
         save: function(props) {
@@ -78,4 +103,6 @@ var ecrReveal = function () {
             );
         },
     });
-}();
+}
+
+ecr_Reveal();

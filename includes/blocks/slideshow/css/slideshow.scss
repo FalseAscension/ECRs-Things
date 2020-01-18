@@ -31,7 +31,6 @@
         }
 
         * {
-            width: 100%;
             margin: 0;
             padding: 0;
         }
@@ -69,6 +68,8 @@
         align-items: flex-end;
 
         list-style: none;
+
+        padding: 0;
 
         a {
             display: block;

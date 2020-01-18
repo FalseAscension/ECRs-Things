@@ -42,10 +42,11 @@ class ecr_Reveal
 
     function render($attributes, $content = '')
     {
-        $context['title'] = $attributes['title'];
-        if (isset($attributes['visibleText'])) {
-            $context['visibleText'] = $attributes['visibleText'];
-        }
+        if(isset($attributes['title'])) $context['title'] = $attributes['title'];
+        if(isset($attributes['visibleText'])) $context['visibleText'] = $attributes['visibleText'];
+        if(isset($attributes['color'])) $context['color'] = $attributes['color'];
+        $context['attributes'] = $attributes;
+
         $context['hiddenContent'] = $content;
 
         return Timber::compile(ECR_PLUGIN_DIR . '/includes/templates/reveal.twig', $context);

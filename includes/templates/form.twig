@@ -1,0 +1,13 @@
+<div id="ecr-form">
+    <div id="notice"><ul></ul></div>
+    <form class="ecr-form" action="#">
+        <div class="form-wrap">
+            {{ content }}
+            <div class="form-group">
+              <label style="display:none;" for="submit">{{ submit|default("Submit") }}</label>
+              <input id="submit" type="submit" value="{{ submit|default("Submit") }}">
+            </div>
+        </div>
+    </form>
+</div>
+

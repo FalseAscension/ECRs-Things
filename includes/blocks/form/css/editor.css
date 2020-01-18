@@ -1,0 +1,19 @@
+.wp-block-ecr-form {
+    padding: 1em;
+    border: 1px solid #f2f2f2;
+}
+
+.wp-block-ecr-form .fields-row {
+    display: flex;
+    width: 100%;
+    
+    border-bottom: 1px dashed #cccccc;
+}
+
+.wp-block-ecr-form .fields-row > .components-base-control {
+    padding: 0 0.5em;
+}
+
+.wp-block-ecr-form .fields-button-add {
+    margin: 1em 0;
+}

@@ -1,4 +1,4 @@
-<div class="slideshow__container">
+<div class="slideshow__container {{ attributes['className']|default("") }}">
     <ul class="slideshow"
         {% for k, v in attributes %}
             data-{{ k }}={{ v }}

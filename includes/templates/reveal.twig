@@ -1,18 +1,22 @@
-<dl class="reveal js-reveal">
-    <dt class="reveal__heading js-reveal-heading">
-        {{ title }}
+<dl class="reveal js-reveal" {% if color %}style="border-color: {{ color }}"{% endif %}>
+    <dt class="reveal__heading js-reveal-heading" {% if color %}data-color="{{ color }}"{% endif %}>
+        {{ title|default('') }}
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+            <polygon {% if color %}style="fill: {{ color }}"{% endif %} points="176.3,443.7 147,414.4 311.4,250 147,85.6 176.3,56.3 370,250 "/>
+        </svg>
     </dt>
     {% if visibleText %}
         <dd class="reveal__content type">
-            <p>{{ visibleText }}</p>
+            <p>{{ visibleText|default('') }}</p>
 
             <div class="reveal__hidden type">
-                {{ hiddenContent }}
+                {{ hiddenContent|default('') }}
             </div>
         </dd>
     {% else %}
     <dd class="reveal__content reveal__hidden type">
-        {{ hiddenContent }}
+        {{ hiddenContent|default('') }}
     </dd>
     {% endif %}
 </dl>
