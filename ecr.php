@@ -3,7 +3,7 @@
  * Plugin Name:     Emil Carr-Ross' Things
  * Description:     Custom blocks and fun things I use in my themes
  * Author:          Emil Carr-Ross
- * Version:         1.01
+ * Version:         1.02
  * Author URI:      http://emilcarr.scot/
  */
 define("ECR_PLUGIN_URL", plugin_dir_url(__FILE__));

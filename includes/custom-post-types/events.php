@@ -2,8 +2,8 @@
 
 class ecr_Events
 {
-    private $postType = "ecr_event";
-    private $taxonomyType = "ecr_event_type";
+    public $postType = "ecr_event";
+    public $taxonomyType = "ecr_event_type";
 
     function __construct(){}
 
@@ -48,13 +48,6 @@ class ecr_Events
     }
 
     function buildQuery($from='', $to='', $type='', $keywords='', $args=array()) {
-        $wpQueryArgs = array(
-            'post_type' => $this->postType,
-            'posts_per_page' => -1,
-            'meta_key' => 'ecr_event_details_start',
-            'orderby' => 'meta_value',
-            'order' => 'ASC'
-        );
         $metaQuery = array();
         $taxQuery = array();
 
@@ -84,19 +77,30 @@ class ecr_Events
         }
 
         if($keywords !== '') {
-            $wpQueryArgs['s'] = $keywords;
+            $args['s'] = $keywords;
         }
 
         if(count($metaQuery) > 1) $metaQuery['relation'] = "AND";
         if(count($taxQuery) > 1) $taxQuery['relation'] = "AND";
 
-        $wpQueryArgs['meta_query'] = $metaQuery;
-        $wpQueryArgs['tax_query'] = $taxQuery;
+        $args['meta_query'] = $metaQuery;
+        $args['tax_query'] = $taxQuery;
 
-        $wpQueryArgs = array_merge($wpQueryArgs, $args);
-        return $wpQueryArgs;
+        return $this->query($args);
     }
-    
+
+    function query($args=array()) {
+        $wpQueryArgs = array(
+            'post_type' => $this->postType,
+            'posts_per_page' => -1,
+            'meta_key' => 'ecr_event_details_start',
+            'orderby' => 'meta_value',
+            'order' => 'ASC'
+        );
+
+        return array_merge($wpQueryArgs, $args);
+    }
+
     function addThumbnails(&$events) {
         foreach ($events as &$event) {
             $event->thumbnail = new TimberImage(get_the_post_thumbnail_url($event->id));

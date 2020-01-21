@@ -1,9 +1,14 @@
 <?php
 
-class ecr_PostcodeNotFoundException extends Exception{}
+class ecr_InvalidPostcodeException extends Exception {}
+class ecr_PostcodeNotFoundException extends Exception {}
 
 function getPostcodeCoordinates($postcode) {
-    $api_url = "https://api.postcodes.io/postcodes?q=";
+
+    // Outcode
+    if(preg_match('/\A[a-zA-Z]{1,2}[0-9][a-zA-Z0-9]?\z/', $postcode)) $api_url = "https://api.postcodes.io/outcodes/";
+    // Postcode
+    else $api_url = "https://api.postcodes.io/postcodes?q=";
 
     $ch = curl_init();
     $options = array(
@@ -16,10 +21,21 @@ function getPostcodeCoordinates($postcode) {
     $response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     curl_close($ch);
+    
+    //throw Exception($api_url . ' | ' . $response);
+
 
     if($response_code !== 200 || $response['status'] !== 200) throw new Exception('postcodes.io API returned status code ' . $response_code . '. ' . $api_url . $postcode);
-    if($response['result'] == NULL || count($response['result']) == 0) throw new ecr_PostcodeNotFoundException('Postcode not found.');
+    if($response_code == 404 || $response['result'] == NULL || count($response['result']) == 0) throw new ecr_PostcodeNotFoundException('Postcode not found.');
 
+    if(isset($response['result']['longitude'])) { // Outcode api returns 1 object
+        return array(
+            'lat' => $response['result']['latitude'],
+            'long' => $response['result']['longitude']
+        );
+    }
+
+    // Postcodes query api returns array of objects, grab the first
     return array(
         'lat' => $response['result'][0]['latitude'],
         'long' => $response['result'][0]['longitude']

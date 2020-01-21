@@ -1,5 +1,5 @@
-<div class="events-list flex">
+<div class="events-list flex {{ attributes['className']|default("") }}">
     {% for event in events %}
-        {% include 'partials/tease-event.twig' with {'event': event, 'class': "flex-item"} %}
+        {% include 'partials/tease-event.twig' with {'event': event} %}
     {% endfor %}
 </div>

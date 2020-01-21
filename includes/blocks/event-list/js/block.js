@@ -8,7 +8,7 @@ function ecr_EventList(){
 
     const {
         TextControl,
-        SelectControl
+        SelectControl,
     } = wp.components;
 
     var el = wp.element.createElement;
@@ -18,7 +18,6 @@ function ecr_EventList(){
         icon: 'editor-ul',
         category: 'common',
         supports: {
-            customClassName: false,
         },
         attributes: {
             n: {
@@ -29,35 +28,49 @@ function ecr_EventList(){
                 type: 'string',
                 default: 'wrap'
             },
+            type: {
+                type: 'string',
+                default: ''
+            }
         },
 
         edit: function(props) {
             
             return [
+                el('div', { style: { display: 'flex' } }, 
+                    el(TextControl, 
+                        {
+                            label: 'n',
+                            type: 'number',
+                            onChange: ( value ) => {
+                                if(!isNaN(value)) props.setAttributes( { n: Number(value) } );
+                            },
+                            value: props.attributes.n
+                        }
+                    ),
+                    el(SelectControl, 
+                        {
+                            label: 'Display Style',
+                            onChange: ( value ) => {
+                                props.setAttributes( { wrap: value } );
+                            },
+                            options: [
+                                { value: 'wrap', label: 'Grid' },
+                                { value: 'scroll', label: 'Scroll Horizontally' }
+                            ],
+                            value: props.attributes.wrap
+                        }
+                    )
+                ),
                 el(TextControl, 
                     {
-                        label: 'n',
-                        type: 'number',
+                        label: 'Event Type',
                         onChange: ( value ) => {
-                            if(!isNaN(value)) props.setAttributes( { n: Number(value) } );
+                            props.setAttributes( { type: value } )
                         },
-                        value: props.attributes.n
+                        value: props.attributes.type
                     }
-                ),
-                el(SelectControl, 
-                    {
-                        label: 'Wraping Style',
-                        onChange: ( value ) => {
-                            props.setAttributes( { wrap: value } );
-                        },
-                        options: [
-                            { value: 'wrap', label: 'Wrap Line' },
-                            { value: 'scroll', label: 'Scroll Horizontally' }
-                        ]
-                    }
-                ),
-
-
+                )
             ];
         },
 

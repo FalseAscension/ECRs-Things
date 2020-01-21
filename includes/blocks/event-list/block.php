@@ -34,21 +34,29 @@ class ecr_eventList
 
     function render($attributes, $content = '')
     {
-        $context['content'] = $content;
+        $context['content'] = $content; 
 
         $eventsObj = new ecr_Events;
-        $eventsQuery = $eventsObj->buildQuery('', '', '', '', array(
-            'posts_per_page' => $attributes['n']
-        ));
-        $context['events'] = $eventsObj->getEvents($eventsQuery);
-        
-        $context['wrap'] = $attributes['wrap'];
 
+        $taxQuery = array();
+        if(isset($attributes['type'])) {
+            $taxQuery[] = array(
+                'taxonomy' => $eventsObj->taxonomyType,
+                'field' => 'slug',
+                'terms' => $attributes['type']
+            );
+        }
+
+        $eventsQuery = $eventsObj->query(array(
+            'posts_per_page' => (isset(attributes['n']) ? $attributes['n'] : -1),
+            'tax_query' => $taxQuery
+        ));
+
+        $context['events'] = $eventsObj->getEvents($eventsQuery);
         $context['attributes'] = $attributes;
 
-        $output = Timber::compile(ECR_PLUGIN_DIR . '/includes/templates/event-list.twig', $context);
+        return Timber::compile(ECR_PLUGIN_DIR . '/includes/templates/event-list.twig', $context);
 
-        return $output;
     }
 }
 
