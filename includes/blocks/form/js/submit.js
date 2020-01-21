@@ -28,7 +28,8 @@ function validateFormData(data) {
 
 jQuery(document).ready(function($) {
     $('.ecr-form').each(function(){
-        var $form = $(this);
+        var $wrap = $(this);
+        var $form = $(this).find('form');
         var $btn = $form.find('input[type=submit]');
 
         $form.on('submit', function(e) {
@@ -36,16 +37,16 @@ jQuery(document).ready(function($) {
 
             $form.addClass('loading');
             $btn.addClass('btn--loading');
-            $('#ecr-form #notice ul').empty();
+            $(this).find('.notice ul').empty();
 
             var data = formToJSON($form);
             console.log(data);
             
             var valid = validateFormData(data);
             if(valid !== true) {
-                $('#ecr-form #notice').removeClass('is-hidden');
+                $(this).find('.notice').removeClass('is-hidden');
                 $.each(valid, function(key, value){
-                    $('#ecr-signup-wrapper #notice ul').append($('<li>').append(value));
+                    $(this).find('.notice ul').append($('<li>').append(value));
                 });
                 return;
             }
@@ -63,19 +64,18 @@ jQuery(document).ready(function($) {
                         $.each($form.find('input'), function(){
                             this.disabled = true;
                         }); 
-                        $form.append($('<h2>').addClass('success').append("Thanks! You will hear from us shortly."));
+                        $wrap.append($('<h2>').addClass('success').append("Success!"));
                     } else {
-                        $('#ecr-form #notice').removeClass('is-hidden');
+                        $(this).find('.notice').removeClass('is-hidden');
                         $.each(response['data']['errors'], function(key, value){
-                            $('#ecr-form #notice ul').append($('<li>').append(value));
+                            $(this).find('.notice ul').append($('<li>').append(value));
                         });
                     }
                 },
                 error: function(response){
                     console.error(response);
-                    $('#ecr-form #notice').removeClass('is-hidden');
-                    $('#ecr-form #notice ul').append($('<li>').append("Sorry, something went wrong. Please try again or contact us."));
-
+                    $(this).find('.notice').removeClass('is-hidden');
+                    $(this).find('.notice ul').append($('<li>').append("Sorry, something went wrong. Please try again or contact us."));
                 }
             });
         });

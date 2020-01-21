@@ -54,7 +54,8 @@ function ecr_FormItem() {
                             { label: 'Checkbox', value: 'checkbox' },
                             { label: 'Range', value: 'range' },
                             { label: 'Number', value: 'number' },
-                            { label: 'Password', value: 'password' }
+                            { label: 'Password', value: 'password' },
+                            { label: 'Hidden', value: 'hidden' }
                         ],
                         onChange: ( value ) => {
                             props.setAttributes( { type: value } );
@@ -95,7 +96,10 @@ function ecr_FormItem() {
             }
 
             if(props.attributes.type != 'textarea') options['type'] = props.attributes.type;
+
             if(props.attributes.type == 'checkbox') options['value'] = "yes";
+            else if(props.attributes.type == 'hidden') options['value'] = props.attributes.label;
+
             if(props.attributes.required) options['required'] = "";
 
             return el('div', { className: props.attributes.type == 'checkbox' ? 'form-group form-checkbox' : 'form-group'}, [
