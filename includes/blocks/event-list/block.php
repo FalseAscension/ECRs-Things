@@ -48,7 +48,7 @@ class ecr_eventList
         }
 
         $eventsQuery = $eventsObj->query(array(
-            'posts_per_page' => (isset(attributes['n']) ? $attributes['n'] : -1),
+            'posts_per_page' => (isset($attributes['n']) ? $attributes['n'] : -1),
             'tax_query' => $taxQuery
         ));
 
