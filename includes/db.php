@@ -60,7 +60,7 @@ class ecr_DB {
              $data_type
         );
 
-        $wpdb->get_results($query, ARRAY_A);
+        return $wpdb->get_results($query, ARRAY_A);
     }
 
     function get_data($slug) {
@@ -72,7 +72,22 @@ class ecr_DB {
              $slug
         );
 
-        $wpdb->get_results($query, ARRAY_A);
+        return $wpdb->get_results($query, ARRAY_A); // Should this return raw or JSON decoded data??
+    }
+
+    function get_slugs($data_type) { // Return a list of slugs for the given data type
+        global $wpdb;
+
+        $query = $wpdb->prepare(
+            "SELECT slug FROM (
+                SELECT MIN(id), slug FROM ecr_data
+                WHERE data_type = %s
+                GROUP BY slug
+            ) AS forms;",
+            $data_type
+        );
+        
+        return $wpdb->get_results($query, ARRAY_A);
     }
 
     function insert_data($data_type, $data, $slug='') {

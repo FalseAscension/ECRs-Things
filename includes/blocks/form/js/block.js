@@ -25,6 +25,10 @@ function ecr_Form() {
             customClassName: false,
         },
         attributes: {
+            slug: {
+                type: 'string',
+                default: ''
+            },
             submit: {
                 type: 'string',
                 default: 'Submit'
@@ -34,12 +38,20 @@ function ecr_Form() {
 
             return [
                 el('div', { className: props.className }, [
+                    el(TextControl, {
+                        label: 'Form Name',
+                        value: props.attributes.slug,
+                        onChange: ( value ) => {
+                            props.setAttributes( { slug: value } );
+                        }
+                    }),
                     el(InnerBlocks, { 
                         allowedBlocks: [ 'ecr/form-item' ],
                         template: [ [ 'ecr/form-item', {} ] ]
                     }),
                     el(TextControl, {
                         className: 'submit',
+                        label: 'submit',
                         value: props.attributes.submit,
                         onChange: ( value ) => {
                             props.setAttributes( { submit: value } );

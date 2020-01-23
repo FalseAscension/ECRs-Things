@@ -57,7 +57,8 @@ class ecr_Form
 
     function render($attributes, $content = '')
     {
-        $context['submit'] = $attributes['submit'];
+        if(isset($attributes['submit'])) $context['submit'] = $attributes['submit'];
+        if(isset($attributes['slug'])) $context['slug'] = $attributes['slug'];
 
         $context['content'] = $content;
         $context['attributes'] = $attributes;

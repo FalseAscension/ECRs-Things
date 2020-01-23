@@ -1,4 +1,4 @@
-## Emil Carr-Ross' Wordpress Things v1.02
+## Emil Carr-Ross' Wordpress Things v1.03
 
 This plugin contains a mishmash of things I use in my wordpress themes.
 

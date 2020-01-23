@@ -1,1 +1,30 @@
-<h1>Testing</h1>
+{#<label for="formselect">Form data: </label>
+<select id="formselect">
+    {% for form in forms %}
+        <option value="{{ form.slug }}">{{ form.slug }}</option>
+    {% endfor %}
+</select>#}
+
+{% for slug, formData in data %}
+
+    <h3>{{ slug }}</h3>
+
+    <table class="form-data" id="{{ slug }}">
+        
+        <tr>
+            {% for field in formData|first|keys %} {# Make the (dangerous) assumption the form has never been edited and is in same order #}
+                <th>{{ field }}</th>
+            {% endfor %}
+        </tr>
+
+        {% for row in formData %}
+            <tr>
+                {% for k,v in row %}
+                    <td> {{ v }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endfor %}

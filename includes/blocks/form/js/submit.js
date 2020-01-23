@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
 
             $form.addClass('loading');
             $btn.addClass('btn--loading');
-            $(this).find('.notice ul').empty();
+            $wrap.find('.notice ul').empty();
 
             var data = formToJSON($form);
             console.log(data);
@@ -56,7 +56,10 @@ jQuery(document).ready(function($) {
                 type: 'POST',
                 data: {
                     action: 'ecr_signup_form',
-                    data: data
+                    data: {
+                        slug: 'formName' in $form.data() ? 'ecr_form_' + $form.data()['formName'] : 'ecr_form',
+                        data: data
+                    }
                 },
                 success: function(response){
                     if(response['success']) {
@@ -66,16 +69,16 @@ jQuery(document).ready(function($) {
                         }); 
                         $wrap.append($('<h2>').addClass('success').append("Success!"));
                     } else {
-                        $(this).find('.notice').removeClass('is-hidden');
+                        $wrap.find('.notice').removeClass('is-hidden');
                         $.each(response['data']['errors'], function(key, value){
-                            $(this).find('.notice ul').append($('<li>').append(value));
+                            $wrap.find('.notice ul').append($('<li>').append(value));
                         });
                     }
                 },
                 error: function(response){
                     console.error(response);
-                    $(this).find('.notice').removeClass('is-hidden');
-                    $(this).find('.notice ul').append($('<li>').append("Sorry, something went wrong. Please try again or contact us."));
+                    $wrap.find('.notice').removeClass('is-hidden');
+                    $wrap.find('.notice ul').append($('<li>').append("Sorry, something went wrong. Please try again or contact us."));
                 }
             });
         });

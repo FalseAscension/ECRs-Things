@@ -22,7 +22,7 @@ class ecr_DBForm {
     }
     
     function submitForm($data) {
-        $response = $this->validateForm($data);
+        $response = $this->validateForm($data['data']);
 
         if(!$response['success']) {
             return $response;
@@ -31,8 +31,8 @@ class ecr_DBForm {
         $ecrdb = new ecr_DB();
 
         $an = $ecrdb->insert_data('form_data',
-            json_encode($data),
-            'f4t_mail_list'
+            json_encode($data['data']),
+            $data['slug']
         );
     
         if(!$an) {
