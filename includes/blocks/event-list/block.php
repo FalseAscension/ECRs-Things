@@ -54,6 +54,11 @@ class ecr_eventList
 
         $context['events'] = $eventsObj->getEvents($eventsQuery);
         $context['attributes'] = $attributes;
+        
+        $context['options'] = array(
+            'date_format' => get_option('date_format'),
+            'time_format' => get_option('time_format')
+        );
 
         return Timber::compile(ECR_PLUGIN_DIR . '/includes/templates/event-list.twig', $context);
 
